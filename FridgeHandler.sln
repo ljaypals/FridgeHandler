@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeHandler.Services", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeHandler.Tests", "FridgeHandler.Tests\FridgeHandler.Tests.csproj", "{EBCE6A7C-289A-4608-ACD7-12035C8FFDBB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1582D47A-BBB5-472A-BC94-54B3A2B8460E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,8 @@ Global
 		{EBCE6A7C-289A-4608-ACD7-12035C8FFDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBCE6A7C-289A-4608-ACD7-12035C8FFDBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBCE6A7C-289A-4608-ACD7-12035C8FFDBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EBCE6A7C-289A-4608-ACD7-12035C8FFDBB} = {1582D47A-BBB5-472A-BC94-54B3A2B8460E}
 	EndGlobalSection
 EndGlobal

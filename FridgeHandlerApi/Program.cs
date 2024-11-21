@@ -1,40 +1,30 @@
 using FridgeHandler.Data;
-using FridgeHandler.Services;
-using FridgeHandler.Services.Implementations;
-using FridgeHandler.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container
 builder.Services.AddControllers();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped<IFoodItemService, FoodItemService>();
-builder.Services.AddScoped<IRecipeService, RecipeService>();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-    });
-});
-
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        b => b.MigrationsAssembly("FridgeHandler.Data")));
+
 
 var app = builder.Build();
 
+// Configure middleware
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.UseRouting();
-app.UseCors("AllowAll");
-app.UseAuthentication(); 
 app.UseAuthorization();
+app.MapGet("/", () => "Welcome to FridgeHandler API");
 
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.MapControllers();
+app.MapControllers(); // This maps your controllers to endpoints
 
 app.Run();

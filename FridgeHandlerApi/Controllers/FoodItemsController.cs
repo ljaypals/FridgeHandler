@@ -1,7 +1,6 @@
-﻿using FridgeHandler.Services;
+﻿using Microsoft.AspNetCore.Mvc;
 using FridgeHandler.Data.Models;
 using FridgeHandler.Services.Interface;
-using Microsoft.AspNetCore.Mvc;
 
 namespace FridgeHandlerAPI.Controllers
 {
@@ -19,22 +18,7 @@ namespace FridgeHandlerAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FoodItem>>> GetFoodItems()
         {
-            var items = await _foodItemService.GetAllItemsAsync();
-            return Ok(items);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<FoodItem>> AddFoodItem(FoodItem item)
-        {
-            var newItem = await _foodItemService.AddItemAsync(item);
-            return CreatedAtAction(nameof(GetFoodItems), new { id = newItem.Id }, newItem);
-        }
-
-        [HttpGet("expiring")]
-        public async Task<ActionResult<IEnumerable<FoodItem>>> GetExpiringItems()
-        {
-            var items = await _foodItemService.GetExpiringItemsAsync();
-            return Ok(items);
+            return Ok(await _foodItemService.GetAllItemsAsync());
         }
     }
 }
